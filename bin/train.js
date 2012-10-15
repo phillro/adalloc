@@ -24,6 +24,12 @@ var allocationWeights = analyzer.test(getInputRow(lastRow).input,budget);
 var allocations = analyzer.caclulateAllocation(allocationWeights,budget);
 console.log(allocations);
 
+var allocated=0;
+for (var a in allocations){
+    allocated+=allocations[a];
+}
+console.log('Allocated: '+allocated);
+
 function getInputRow(row,budget) {
     var clicksSum = 0;
     var bestClicks = -1;
@@ -54,15 +60,11 @@ function getInputRow(row,budget) {
     }
 
     var allocated=0;
+
+    //Add the allocated % of the budget to the output. The max value gets %100 of the budget, if multiple max vals, split it.
     for (var j = 0; j < row.length; j++) {
-        var a =0;
-        if (alloc.indexOf(j) > -1) {
-            a = ((1 / alloc.length)*budget)/budget;
-        } else {
-            a=0;
-        }
-        output['a' + j] =a
-        allocated+=a;
+        output['a'+j]=alloc.indexOf(j)>-1 ? ((1 / alloc.length)*budget)/budget : 0;
+        allocated+=output['a'+j];
     }
 
     return {input:input, output:output};
