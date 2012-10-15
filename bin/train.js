@@ -15,9 +15,9 @@ var trainingSet = [];
 var analyzer = new Analyzer();
 var hourlyAllocations = [];
 
-//Loop through each hour, train on the last hour and calculate allocations. Allocations are now iterative
+//Loop through each hour, train on the last hour and calculate allocations. Allocations are now iterative, rebalancing after each hour.
+//However, its O(n*n). Would be much better to do one pass on a single training set and test each new hour, but I wanted an hourly progression of rebalancing the budget.
 //Assuming its optimizing based on past hours(training sets) experience
-// (N*N)*iterations. Slow.
 for (var j = 0; j < rows.length; j++) {
     var outputRow=[];
     var inputRow = getInputRow(rows[j].split(',').slice(1, 101), budget);
