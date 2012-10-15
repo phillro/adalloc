@@ -22,7 +22,7 @@ for (var j = 0; j < rows.length; j++) {
     var outputRow=[];
     var inputRow = getInputRow(rows[j].split(',').slice(1, 101), budget);
     if (trainingSet.length > 0) {
-        analyzer.train(trainingSet, {log:true, logPeriod:100, iterations:10});
+        analyzer.train(trainingSet, {log:true, logPeriod:100, iterations:iterations});
         var allocationWeights = analyzer.test(inputRow.input);
         var allocation = analyzer.caclulateAllocation(allocationWeights, budget);
         for(var ad in allocation){
