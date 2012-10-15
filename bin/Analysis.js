@@ -21,21 +21,6 @@ Analyzer.prototype.test = function (testInput) {
     return output;
 }
 
-Analyzer.prototype.getClosest = function (bestValue, input) {
-    var idx = -1;
-    var minDiff = 100;
-    var j = 0;
-    for (var a in input) {
-        var ad = input[a];
-        var diff = Math.abs(ad - bestValue);
-        if (diff < minDiff) {
-            idx = j;
-            minDiff = diff;
-        }
-        j++;
-    }
-    return {idx:idx, bestWeightedValue:bestValue, best:input[idx]};
-}
 
 Analyzer.prototype.caclulateAllocation = function (allocationWeights, budget) {
     var allocation = {};
