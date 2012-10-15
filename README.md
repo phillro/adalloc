@@ -2,6 +2,8 @@ Code Test From an interview
 ---------------------------
 Problem is below. I tried to solve this using a bayesian classifier. Probably totally wrong and inacurrate, but I had fun so here it is.
 
+Data for training set is in data/data.csv
+
 Ad Optimization
 ---------------
 
