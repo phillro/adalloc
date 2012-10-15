@@ -18,8 +18,7 @@ Analyzer.prototype.train = function (trainingSet, options) {
 
 Analyzer.prototype.test = function (testInput) {
     var output = this.net.run(testInput);
-    var closest = this.getClosest(output.best, testInput);
-    return closest;
+    return output;
 }
 
 Analyzer.prototype.getClosest = function (bestValue, input) {
@@ -29,14 +28,27 @@ Analyzer.prototype.getClosest = function (bestValue, input) {
     for (var a in input) {
         var ad = input[a];
         var diff = Math.abs(ad - bestValue);
-        if (diff<minDiff) {
+        if (diff < minDiff) {
             idx = j;
             minDiff = diff;
         }
         j++;
     }
     return {idx:idx, bestWeightedValue:bestValue, best:input[idx]};
+}
 
+Analyzer.prototype.caclulateAllocation = function (allocationWeights, budget) {
+    var allocation = {};
+    var allocated = 0;
+    var totalAlloc = 0;
+    for (var a in allocationWeights) {
+        totalAlloc += allocationWeights[a]
+    }
+    for (var a in allocationWeights) {
+        allocation[a] = (allocationWeights[a] / totalAlloc) * 10000;
+        allocated += allocation[a];
+    }
+    return allocation;
 }
 
 exports.Analyzer = Analyzer
