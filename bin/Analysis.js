@@ -49,4 +49,6 @@ Analyzer.prototype.caclulateAllocation = function (allocationWeights, budget) {
     return allocation;
 }
 
+
+
 exports.Analyzer = Analyzer
