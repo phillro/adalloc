@@ -4,7 +4,7 @@ var fs = require('fs'),
 
 var file = fs.readFileSync(__dirname + '/../data/data.csv', 'utf8')
 var rows = file.split('\n');//.slice(1, 10);
-var outputFileName = '/../data/hourlyAllocations3.csv';
+var outputFileName = '/../data/time_series2_single_pass.csv';
 
 rows = rows.slice(1, rows.length);
 var budget = 10000;
@@ -16,7 +16,7 @@ var analyzer = new Analyzer();
 //Can do singlePassTraining or iterativeTraining
 //Single pass trains once on the entire data set, Iterative will train, then allocate once for each row
 //Iterative resembles a real world scenario beter probably, but for this example is much slower
-var trainingStrategy = iterativeTraining;
+var trainingStrategy = singlePassTraining;
 
 
 trainingStrategy(rows, iterations, function (hourlyAllocations) {
@@ -39,7 +39,7 @@ function singlePassTraining(rows, iterations, cb) {
     }
     analyzer.train(trainingSet, {log:true, logPeriod:100, iterations:iterations});
     var outputRow = [];
-    for (var i = 0; i < rows[j].split(',').length - 1; i++) {
+    for (var i = 0; i < rows[0].split(',').length - 1; i++) {
         outputRow.push('ad' + i);
     }
     hourlyAllocations.push(outputRow);
